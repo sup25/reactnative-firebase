@@ -12,10 +12,8 @@ import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { app, auth } from "../firebase";
-import { useNavigation } from "@react-navigation/core";
 
-const LoginScreen = () => {
-  const navigation = useNavigation();
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registerErrorMessage, setRegisterErrorMessage] = useState("");
@@ -67,7 +65,7 @@ const LoginScreen = () => {
         setRegisterSuccessMessage("Successfully registered");
         setEmail("");
         setPassword("");
-
+        navigation.navigate("MbVerification");
         setTimeout(() => {
           setRegisterErrorMessage("");
         }, 3000);
@@ -79,6 +77,8 @@ const LoginScreen = () => {
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
           setRegisterErrorMessage("User already exists.");
+        } else if (error.code === "auth/invalid-email") {
+          setRegisterErrorMessage("Provide both email and password");
         } else {
           setRegisterErrorMessage(error.message);
         }
@@ -97,13 +97,16 @@ const LoginScreen = () => {
           value={email}
           onChangeText={(text) => setEmail(text)}
           style={styles.input}
+          autoCapitalize="none"
         />
+
         <TextInput
           placeholder="Password"
           value={password}
           onChangeText={(text) => setPassword(text)}
           style={styles.input}
           secureTextEntry
+          autoCapitalize="none"
         />
         {registerErrorMessage ? (
           <Text style={styles.errorText}>{registerErrorMessage}</Text>
@@ -174,6 +177,7 @@ const styles = StyleSheet.create({
     color: "red",
     marginTop: 5,
     textAlign: "center",
+    fontSize: 20,
   },
   forgotPasswordText: {
     marginTop: 20,
@@ -194,5 +198,6 @@ const styles = StyleSheet.create({
     color: "green",
     marginTop: 5,
     textAlign: "center",
+    fontSize: 20,
   },
 });

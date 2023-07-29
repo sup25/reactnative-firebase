@@ -14,7 +14,7 @@ const HomeScreen = () => {
       .catch((error) => console.log(error));
   };
   return (
-    <View style={styles.container}>
+    <View style={styles.container} screenOptions={{ headerShown: false }}>
       <Text style={styles.textEmail}>Email:{auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>

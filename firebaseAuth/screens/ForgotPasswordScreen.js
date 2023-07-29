@@ -24,7 +24,7 @@ const ForgotPasswordScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} screenOptions={{ headerShown: false }}>
       {emailSent ? (
         <Text style={styles.emailSentText}>
           Password reset email has been sent.
