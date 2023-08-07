@@ -140,7 +140,7 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "dodgerblue",
+    backgroundColor: "red",
     width: "100%",
     padding: 15,
     borderRadius: 10,
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
   buttonOutline: {
     backgroundColor: "white",
     marginTop: 5,
-    borderColor: "dodgerblue",
+    borderColor: "red",
     borderWidth: 2,
   },
   buttonContainer: {
@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   buttonOutlineText: {
-    color: "dodgerblue",
+    color: "red",
     fontWeight: "800",
     fontSize: 16,
   },
