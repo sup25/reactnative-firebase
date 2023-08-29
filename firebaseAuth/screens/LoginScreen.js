@@ -35,7 +35,7 @@ const LoginScreen = ({ navigation }) => {
     navigation.navigate("ForgotPassword");
   };
 
-  const handleLogin = () => {
+  const handleUserLogin = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredentials) => {
         const user = userCredentials.user;
@@ -119,7 +119,10 @@ const LoginScreen = ({ navigation }) => {
         ) : null}
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableWithoutFeedback onPress={handleLogin} style={styles.button}>
+        <TouchableWithoutFeedback
+          onPress={handleUserLogin}
+          style={styles.button}
+        >
           <Text style={styles.buttonText}> Login</Text>
         </TouchableWithoutFeedback>
         <TouchableWithoutFeedback
