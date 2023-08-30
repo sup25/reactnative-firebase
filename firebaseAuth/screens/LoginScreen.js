@@ -5,7 +5,7 @@ import {
   Text,
   View,
   TextInput,
-  TouchableWithoutFeedback,
+  TouchableOpacity,
 } from "react-native";
 import {
   createUserWithEmailAndPassword,
@@ -119,12 +119,9 @@ const LoginScreen = ({ navigation }) => {
         ) : null}
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableWithoutFeedback
-          onPress={handleUserLogin}
-          style={styles.button}
-        >
+        <TouchableOpacity onPress={handleUserLogin} style={styles.button}>
           <Text style={styles.buttonText}> Login</Text>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
         <TouchableWithoutFeedback
           onPress={handleSignUp}
           style={[styles.button, styles.buttonOutline]}
