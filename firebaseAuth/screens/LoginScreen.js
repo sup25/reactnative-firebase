@@ -11,8 +11,8 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { app, auth } from "../firebase";
-
+import { app, auth, updateProfile } from "../firebase";
+//tryinf to update profile after login
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
