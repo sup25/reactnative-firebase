@@ -66,13 +66,6 @@ const LoginScreen = ({ navigation }) => {
         setEmail("");
         setPassword("");
         navigation.navigate("MbVerification");
-        setTimeout(() => {
-          setRegisterErrorMessage("");
-        }, 3000);
-
-        setTimeout(() => {
-          setRegisterSuccessMessage("");
-        }, 3000);
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
