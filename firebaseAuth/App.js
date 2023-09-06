@@ -6,6 +6,7 @@ import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPasswordScreen";
 import MobileVerification from "./screens/MobileVerification";
+import RegisterScreen from "./screens/RegisterScreen";
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ForgotPassword" component={ForgotPasswordScreen} />
         <Stack.Screen name="MbVerification" component={MobileVerification} />
+        <Stack.Screen name="register" component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

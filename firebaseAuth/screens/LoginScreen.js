@@ -6,26 +6,22 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  TouchableWithoutFeedback
 } from "react-native";
 import {
-  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { app, auth, updateProfile } from "../firebase";
-//tryinf to update profile after login
+import { auth } from "../firebase";
+
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registerErrorMessage, setRegisterErrorMessage] = useState("");
   const [loginErrorMessage, setLoginErrorMessage] = useState("");
-  const [registerSuccessMessage, setRegisterSuccessMessage] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        if (!handleSignUp) {
-          navigation.navigate("Home");
-        }
+        navigation.navigate("Home");
       }
     });
     return unsubscribe;
@@ -57,31 +53,6 @@ const LoginScreen = ({ navigation }) => {
       });
   };
 
-  const handleSignUp = () => {
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredentials) => {
-        const user = userCredentials.user;
-        console.log("Registered in with:", user.email);
-        setRegisterSuccessMessage("Successfully registered");
-        setEmail("");
-        setPassword("");
-        navigation.navigate("MbVerification");
-      })
-      .catch((error) => {
-        if (error.code === "auth/email-already-in-use") {
-          setRegisterErrorMessage("User already exists.");
-        } else if (error.code === "auth/invalid-email") {
-          setRegisterErrorMessage("Provide both email and password");
-        } else {
-          setRegisterErrorMessage(error.message);
-        }
-        console.log(error);
-        setTimeout(() => {
-          setRegisterErrorMessage("");
-        }, 3000);
-      });
-  };
-
   return (
     <KeyboardAvoidingView style={styles.container} behavior="height">
       <View style={styles.inputContainer}>
@@ -101,26 +72,17 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
           autoCapitalize="none"
         />
-        {registerErrorMessage ? (
-          <Text style={styles.errorText}>{registerErrorMessage}</Text>
-        ) : null}
         {loginErrorMessage ? (
           <Text style={styles.errorText}>{loginErrorMessage}</Text>
         ) : null}
-        {registerSuccessMessage ? (
-          <Text style={styles.successText}>{registerSuccessMessage}</Text>
-        ) : null}
+      </View>
+      <View >
+        <Text style={{ marginTop:10, fontSize:18}} onPress={() => navigation.navigate("register")}> Register</Text>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={handleUserLogin} style={styles.button}>
           <Text style={styles.buttonText}> Login</Text>
         </TouchableOpacity>
-        <TouchableWithoutFeedback
-          onPress={handleSignUp}
-          style={[styles.button, styles.buttonOutline]}
-        >
-          <Text style={styles.buttonOutlineText}>Register</Text>
-        </TouchableWithoutFeedback>
       </View>
       <TouchableWithoutFeedback onPress={handleForgotPassword}>
         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
@@ -139,12 +101,6 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
   },
-  buttonOutline: {
-    backgroundColor: "white",
-    marginTop: 5,
-    borderColor: "red",
-    borderWidth: 2,
-  },
   buttonContainer: {
     width: "60%",
     justifyContent: "center",
@@ -153,11 +109,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontWeight: "800",
-    fontSize: 16,
-  },
-  buttonOutlineText: {
-    color: "red",
     fontWeight: "800",
     fontSize: 16,
   },
@@ -186,11 +137,5 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width: "80%",
-  },
-  successText: {
-    color: "green",
-    marginTop: 5,
-    textAlign: "center",
-    fontSize: 20,
   },
 });
