@@ -2,19 +2,20 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-nativ
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/core";
-import {  updateProfile } from "firebase/auth";
+import { updateProfile, updateEmail } from "firebase/auth";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
   const [displayName, setDisplayName] = useState("");
   const [newDisplayName, setNewDisplayName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
 
   useEffect(() => {
     const user = auth.currentUser;
     if (user) {
       setDisplayName(user.displayName || "No Display Name");
     }
-    console.log("before username:",user)
+    console.log("before username:", user);
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setDisplayName(user.displayName || "No Display Name");
@@ -32,20 +33,25 @@ const HomeScreen = () => {
       })
       .catch((error) => console.log(error));
   };
- 
-  const updateDisplayName = async () => {
+
+  const updateDisplayNameAndEmail = async () => {
     const user = auth.currentUser;
     try {
-      await updateProfile(user,{
+      await updateProfile(user, {
         displayName: newDisplayName,
       });
-      
-      console.log("updated username:",user)
+
+      // Update the email address using updateEmail
+      await updateEmail(user, newEmail);
+
+      console.log("updated username:", user);
       setDisplayName(newDisplayName);
       setNewDisplayName("");
       console.log("Display name updated:", newDisplayName);
+      setNewEmail(""); // Clear the new email field
+      console.log("Email updated:", newEmail);
     } catch (error) {
-      console.error("Error updating display name:", error);
+      console.error("Error updating display name or email:", error);
     }
   };
 
@@ -58,8 +64,14 @@ const HomeScreen = () => {
         value={newDisplayName}
         onChangeText={(text) => setNewDisplayName(text)}
       />
-      <TouchableOpacity onPress={updateDisplayName} style={styles.button}>
-        <Text style={styles.buttonText}>Update Display Name</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="New Email"
+        value={newEmail}
+        onChangeText={(text) => setNewEmail(text)}
+      />
+      <TouchableOpacity onPress={updateDisplayNameAndEmail} style={styles.button}>
+        <Text style={styles.buttonText}>Update Display Name and Email</Text>
       </TouchableOpacity>
       <Text style={styles.textEmail}>Email: {auth.currentUser?.email}</Text>
       <TouchableOpacity onPress={handleSignOut} style={styles.button}>
