@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/core";
@@ -74,9 +74,9 @@ const HomeScreen = () => {
         <Text style={styles.buttonText}>Update Display Name and Email</Text>
       </TouchableOpacity>
       <Text style={styles.textEmail}>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
+      <TouchableWithoutFeedback onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     </View>
   );
 };
