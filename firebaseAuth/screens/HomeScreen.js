@@ -74,9 +74,9 @@ const HomeScreen = () => {
         <Text style={styles.buttonText}>Update Display Name and Email</Text>
       </TouchableOpacity>
       <Text style={styles.textEmail}>Email: {auth.currentUser?.email}</Text>
-      <TouchableWithoutFeedback onPress={handleSignOut} style={styles.button}>
+      <TouchableOpacity onPress={handleSignOut} style={styles.button}>
         <Text style={styles.buttonText}>Sign out</Text>
-      </TouchableWithoutFeedback>
+      </TouchableOpacity>
     </View>
   );
 };
