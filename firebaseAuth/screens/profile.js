@@ -4,12 +4,7 @@ import React from 'react'
 const profile = () => {
   return (
     <View>
-      <Text>profile</Text>
-      <View>
-        <Text>
-Loggedin as 
-        </Text>
-      </View>
+      
     </View>
   )
 }
