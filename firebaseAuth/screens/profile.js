@@ -6,6 +6,7 @@ const profile = () => {
     <View>
       <Text>profile of </Text>
       <Text>profile </Text>
+      <Text>profile </Text>
     </View>
   )
 }
