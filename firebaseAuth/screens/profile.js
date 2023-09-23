@@ -3,11 +3,7 @@ import React from 'react'
 
 const profile = () => {
   return (
-    <View>
-      <Text>profile of </Text>
-      <Text>profile </Text>
-      <Text>profile </Text>
-    </View>
+  <View></View>
   )
 }
 
