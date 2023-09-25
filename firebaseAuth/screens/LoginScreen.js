@@ -86,6 +86,7 @@ const LoginScreen = ({ navigation }) => {
       </View>
       <TouchableWithoutFeedback onPress={handleForgotPassword}>
         <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
+        <Text>Click here to change the password</Text>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );
