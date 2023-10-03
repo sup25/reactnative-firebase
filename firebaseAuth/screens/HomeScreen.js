@@ -1,4 +1,11 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, TouchableWithoutFeedback, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { useNavigation } from "@react-navigation/core";
@@ -58,6 +65,7 @@ const HomeScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textDisplayName}>Display Name: {displayName}</Text>
+      <Text>Your name is : </Text>
       <TextInput
         style={styles.input}
         placeholder="New Display Name"
@@ -70,7 +78,10 @@ const HomeScreen = () => {
         value={newEmail}
         onChangeText={(text) => setNewEmail(text)}
       />
-      <TouchableOpacity onPress={updateDisplayNameAndEmail} style={styles.button}>
+      <TouchableOpacity
+        onPress={updateDisplayNameAndEmail}
+        style={styles.button}
+      >
         <Text style={styles.buttonText}>Update Display Name and Email</Text>
       </TouchableOpacity>
       <Text style={styles.textEmail}>Email: {auth.currentUser?.email}</Text>
