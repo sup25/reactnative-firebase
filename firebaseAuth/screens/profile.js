@@ -5,6 +5,7 @@ const profile = () => {
   return (
     <View>
       <Text>Hello</Text>
+      <Text>Hello {username}</Text>
     </View>
   );
 };
